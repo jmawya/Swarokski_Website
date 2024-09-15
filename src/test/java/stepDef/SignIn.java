@@ -12,7 +12,7 @@ public class SignIn extends config {
 
     @And("Customer enter their valid email log in page")
     public void customerEnterTheirValidEmailLogInPage() {
-        driver.findElement(By.xpath("//*[@id='sacLoginForm-j_username']")).sendKeys("jmawya07@gmail.com");
+        driver.findElement(By.xpath("//*[@id='sacLoginForm-j_username']")).sendKeys("pogduc@cggup.com");
     }
 
     @And("Customer enter valid password in log in page")

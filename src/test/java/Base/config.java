@@ -27,7 +27,7 @@ public class config {
             throw new IllegalArgumentException("Invalid browser type: " + browserType);
         }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(45));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
         return driver;
         //return can't be void.
     }

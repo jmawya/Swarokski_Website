@@ -28,4 +28,10 @@ public class ForgotPasswordStep extends config {
         driver.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys("jmawya07@gmail.com");
         driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/div/button/span")).click();
     }
+
+    @And("customer click on continue button from my account page")
+    public void customerClickOnContinueButtonFromMyAccountPage() {
+
+        driver.findElement(By.xpath("//*[@id=\"sacLoginForm\"]/button[2]")).click();
+    }
 }

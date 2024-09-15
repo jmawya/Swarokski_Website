@@ -4,6 +4,13 @@ import Base.config;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.time.Duration;
+import java.util.List;
 
 
 public class CheckoutStep extends config {
@@ -74,32 +81,98 @@ public class CheckoutStep extends config {
 
     }
     @And("Customer enter valid card number")
-    public void customerEnterValidCardNumber(){
-        driver.findElement(By.xpath("//*[@id=\"card-container\"]/div/div/div[2]/div[1]/div[1]/div[2]/span")).sendKeys("5262636243841148");
+    public void customerEnterValidCardNumber() {
+        List<WebElement>na=driver.findElements(By.tagName("iframe"));
+        System.out.println(na.size());
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(0);
+
+      WebElement nine=driver.findElement(By.cssSelector("input[data-fieldtype=\"encryptedCardNumber\"]"));
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(500));
+        wait.until(ExpectedConditions.visibilityOf(nine));
+        nine.sendKeys("4111 1111 1111 1111");
 
     }
-
     @And("Customer enter card expire date")
     public void customerEnterCardExpireDate() {
-        driver.findElement(By.xpath("//*[@id='adyen-checkout-encryptedExpiryDate-1724259560001']")).sendKeys("10/27");
+        List<WebElement>na=driver.findElements(By.tagName("iframe"));
+        System.out.println(na.size());
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(1);
+
+        WebElement nine=driver.findElement(By.cssSelector("input[data-fieldtype=\"encryptedExpiryDate\"]"));
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(500));
+        wait.until(ExpectedConditions.visibilityOf(nine));
+        nine.sendKeys("04/29");
     }
 
     @And("Customer enter valid security code")
     public void customerEnterValidSecurityCode() {
-        driver.findElement(By.xpath("//*[@id='adyen-checkout-encryptedSecurityCode-1724259560002']]")).sendKeys("658");
+       List<WebElement>na=driver.findElements(By.tagName("iframe"));
+        System.out.println(na.size());
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(2);
+
+
+        WebElement nine=driver.findElement(By.cssSelector("input[data-fieldtype=\"encryptedSecurityCode\"]"));
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(500));
+        wait.until(ExpectedConditions.visibilityOf(nine));
+        nine.sendKeys("658");
     }
 
     @And("Customer enter card holder name")
     public void customerEnterCardHolderName() {
-        driver.findElement(By.xpath("//*[@id='adyen-checkout-holderName-1724259560003']")).sendKeys("Zachary Emmerich");
+        driver.findElement(By.cssSelector("input[placeholder='Card holder name*']")).sendKeys("Zachary Emmerich");
     }
-
 
 
     @And("customer enter valid email")
     public void customerEnterValidEmail() {
 
         driver.findElement(By.xpath("//*[@id='guestCheckoutLoginFormDefinition_email']")).sendKeys("jmawya07@gmail.com");
+    }
+
+
+    @And("Customer click google pay")
+    public void customerClickGooglePay() {
+
+        driver.findElement(By.xpath("//*[@id=\"hostedpaywithgoogleadyenUSA\"]")).click();
+
+    }
+
+
+    @And("customer click on continue button checkout")
+    public void customerClickOnContinueButtonCheckout() {
+        WebElement df = driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div[1]/div[2]/div/button/span/span"));
+       try {
+           df.click();
+       }catch (Exception e){
+           df = driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div[1]/div[2]/div/button/span/span"));
+           df.click();
+       }
+    }
+
+    @And("customer al review page")
+    public void customerAlReviewPage() {
+        String exp="Email Address";
+
+
+       String  act = driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div/div[2]/div[2]/div/div[1]/div")).getText();
+      Assert.assertEquals(act,exp);
+    }
+    @And("click on buy now button")
+    public void clickOnBuyNowButton() {
+        driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div/div[7]/label")).click();
+    }
+
+    @When("customer click on continue")
+    public void customerClickOnContinue() {
+
+        WebElement ac=driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div[1]/div[2]/div/button/span/span"));
+        WebDriverWait wait =new WebDriverWait(driver,Duration.ofSeconds(660));
+        wait.until(ExpectedConditions.visibilityOf(ac));
+        ac.click();
+
     }
 
 

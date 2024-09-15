@@ -7,8 +7,3 @@ Feature: Forgate password
     And Customer click on continue
     And Customer click on forgot password link
     And Customer click on submit button
-    And Customer at gmail homepage
-    And Customer enter their valid email from google sign in page
-
-
-
