@@ -28,16 +28,16 @@ public class CheckoutStep extends config {
 
     @And("Customer on add to bag button")
     public void customerOnAddToBagButton() {
-
         driver.findElement(By.xpath("//*[@id='swa-dialog-wrong-base-store']/div/div[2]/div/div[3]/button[2]")).click();
-        driver.findElement(By.id("addToCartButton")).click();
+        driver.findElement(By.cssSelector("button[id='addToCartButton']")).click();
+
+        //driver.findElement(By.id("addToCartButton")).click();
 
     }
     @And("Customer click on shoping bag link")
     public void customerClickOnShopingBagLink() {
 
-        driver.findElement(By.xpath("/html/body/header/div[5]/div[2]/div[2]/div[2]/a/span[1]")).click();
-
+        driver.findElement(By.xpath("/html/body/header/div[5]/div[5]/div/div[2]/div[2]/div[2]/div/div/div/a/span/span")).click();
 
     }
 
@@ -108,7 +108,7 @@ public class CheckoutStep extends config {
 
     @And("Customer enter valid security code")
     public void customerEnterValidSecurityCode() {
-       List<WebElement>na=driver.findElements(By.tagName("iframe"));
+       List<WebElement> na=driver.findElements(By.tagName("iframe"));
         System.out.println(na.size());
         driver.switchTo().defaultContent();
         driver.switchTo().frame(2);
@@ -155,10 +155,8 @@ public class CheckoutStep extends config {
     @And("customer al review page")
     public void customerAlReviewPage() {
         String exp="Email Address";
-
-
-       String  act = driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div/div[2]/div[2]/div/div[1]/div")).getText();
-      Assert.assertEquals(act,exp);
+        String  act = driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div/div[2]/div[2]/div/div[1]/div")).getText();
+        Assert.assertEquals(act,exp);
     }
     @And("click on buy now button")
     public void clickOnBuyNowButton() {
@@ -168,7 +166,7 @@ public class CheckoutStep extends config {
     @When("customer click on continue")
     public void customerClickOnContinue() {
 
-        WebElement ac=driver.findElement(By.xpath("//*[@id=\"swa-main\"]/div[3]/div[1]/div[2]/div/button/span/span"));
+        WebElement ac=driver.findElement(By.xpath("//*[@id='swa-main']/div[3]/div[1]/div[2]/div/button"));
         WebDriverWait wait =new WebDriverWait(driver,Duration.ofSeconds(660));
         wait.until(ExpectedConditions.visibilityOf(ac));
         ac.click();
